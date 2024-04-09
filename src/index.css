@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .gradientGray {
+    --gradient-color-start: #5c6670;
+    --gradient-color-end: #131316;
+  }
+}
+
+@font-face {
+  font-family: "Degular_Black";
+  src: url("/fonts/DegularText-Black.otf") format("opentype");
+  /* Add more src declarations for different font formats if needed */
+  /* font-weight: normal;
+  font-style: normal; */
+}
+@font-face {
+  font-family: "Degular_Regular";
+  src: url("/fonts/DegularText-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Degular_Medium";
+  src: url("/fonts/DegularText-Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: "Degular_SemiBold";
+  src: url("/fonts/DegularText-Semibold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Degular_Bold";
+  src: url("/fonts/DegularText-Bold.otf") format("opentype");
+}
+
+:root {
+  font-family: "Degular_Regular";
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border: 3px solid #131316 !important;
+}
+
+input:focus {
+  border: 3px solid #131316 !important;
+  outline: 2px solid #131316 !important;
+}
+
+.imgSvg:hover {
+  filter: brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0);
+  fill: red
+}
+
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
