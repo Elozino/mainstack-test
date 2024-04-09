@@ -1,6 +1,12 @@
 import { Modal } from '@mantine/core';
 
-const CustomModal = ({ opened, close, children }) => {
+type CustomModalProps = {
+  opened: boolean;
+  close: () => void;
+  children: Readonly<JSX.Element>;
+}
+
+const CustomModal = ({ opened, close, children }: CustomModalProps) => {
   return (
     <>
       <Modal opened={opened} onClose={close} title="Filter"
