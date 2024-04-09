@@ -13,7 +13,7 @@ type ProfileMenuProps = {
 const ProfileMenu = ({ data }: ProfileMenuProps) => {
   return (
     <Menu.Dropdown className='p-3'>
-      <Menu.Item>
+      <Menu.Item className='hover:bg-transparent'>
         <div className='flex items-center gap-3'>
           <div className='w-[32px] h-[32px] rounded-full flex items-center justify-center bg-gradient-to-r from-gray_500 to-gray_600'>
             <span className='font-degularSemibold text-sm leading-4 text-white'>
