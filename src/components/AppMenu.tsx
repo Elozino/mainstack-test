@@ -10,7 +10,7 @@ const AppMenu = () => {
           <div>
             <img
               className='shadow-navbar p-2 rounded-lg'
-              src="/public/icons/product-icon.svg" alt="product" />
+              src="/icons/product-icon.svg" alt="product" />
           </div>
           <div className='text-black_300'>
             <h4 className='font-degularSemibold text-base'>Link in Bio</h4>
@@ -25,7 +25,7 @@ const AppMenu = () => {
           <div>
             <img
               className='shadow-navbar p-2 rounded-lg'
-              src="/public/icons/product-icon2.svg" alt="product2" />
+              src="/icons/product-icon2.svg" alt="product2" />
           </div>
           <div className='text-black_300'>
             <h4 className='font-degularSemibold text-base'>Store</h4>
@@ -40,7 +40,7 @@ const AppMenu = () => {
           <div>
             <img
               className='shadow-navbar p-2 rounded-lg'
-              src="/public/icons/product-icon3.svg" alt="product3" />
+              src="/icons/product-icon3.svg" alt="product3" />
           </div>
           <div className='text-black_300'>
             <h4 className='font-degularSemibold text-base'>Media Kit</h4>
@@ -55,7 +55,7 @@ const AppMenu = () => {
           <div>
             <img
               className='shadow-navbar p-2 rounded-lg'
-              src="/public/icons/product-icon4.svg" alt="product4" />
+              src="/icons/product-icon4.svg" alt="product4" />
           </div>
           <div className='text-black_300'>
             <h4 className='font-degularSemibold text-base'>Invoicing</h4>
@@ -70,7 +70,7 @@ const AppMenu = () => {
           <div>
             <img
               className='shadow-navbar p-2 rounded-lg'
-              src="/public/icons/product-icon4.svg" alt="product5" />
+              src="/icons/product-icon4.svg" alt="product5" />
           </div>
           <div className='text-black_300'>
             <h4 className='font-degularSemibold text-base'>Bookings</h4>
