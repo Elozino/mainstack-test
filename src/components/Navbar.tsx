@@ -75,8 +75,8 @@ const Navbar = () => {
             <Menu.Target>
               <a href='#' className={`
               flex items-start gap-1 text-gray_400
-            hover:bg-gray_50 py-2 px-4 rounded-full transition-all
-              ${openApp ? 'bg-black text-white group hover:bg-black' : ''}
+            py-2 px-4 rounded-full transition-all
+              ${openApp ? 'bg-black text-white group hover:bg-black' : 'hover:bg-gray_50'}
               `}>
                 <img src="/icons/overview.svg" alt="overview"
                   className={openApp ? "filter-white" : ''}
