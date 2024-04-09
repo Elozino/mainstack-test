@@ -25,12 +25,12 @@ const Transactions = ({ transaction, openFilterModal }: TransactionProps) => {
           <Button
             text="Filter"
             onClick={openFilterModal}
-            icon={<img src="/public/icons/arrow-down.svg" alt="arrow-down" />}
+            icon={<img src="/icons/arrow-down.svg" alt="arrow-down" />}
             className="flex items-center justify-center gap-3 w-[107px] h-12 text-black_300 bg-gray_50 rounded-full"
           />
           <Button
             text="Export"
-            icon={<img src="/public/icons/export.svg" alt="export" />}
+            icon={<img src="/icons/export.svg" alt="export" />}
             className="flex items-center justify-center gap-3 w-[139px] h-12 text-black_300 bg-gray_50 rounded-full"
           />
         </div>
