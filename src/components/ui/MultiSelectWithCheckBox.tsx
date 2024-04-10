@@ -1,19 +1,20 @@
-import { useState } from 'react';
 import { Checkbox, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@mantine/core';
-import classes from '../../mantine.module.css'
+import classes from '../../mantine.module.css';
 
 type MultiSelectCheckboxProps = {
   data: string[];
   placeholder: string;
+  value: string[];
+  setValue: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export function MultiSelectCheckbox({ data, placeholder }: MultiSelectCheckboxProps) {
+export function MultiSelectCheckbox({ data, placeholder, value, setValue }: MultiSelectCheckboxProps) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
   });
 
-  const [value, setValue] = useState<string[]>([]);
+  // const [value, setValue] = useState<string[]>([]);
 
   const handleValueSelect = (val: string) =>
     setValue((current) =>

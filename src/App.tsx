@@ -4,6 +4,7 @@ import {
 } from '@tanstack/react-query'
 import Dashboard from "./pages/Dashboard"
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 import { MantineProvider } from '@mantine/core';
 
 const queryClient = new QueryClient()

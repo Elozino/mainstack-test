@@ -32,6 +32,3 @@ Expected deliverables includes:
 
 ● Writing quality unit test will carry a significant bonus
 Click on this link to submit your deliverables
-
-
-check navbar shadow

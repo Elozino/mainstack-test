@@ -1,29 +1,19 @@
+import { TransactionProps } from '../types'
 import Button from './ui/Button'
 
-type Transaction = {
-  payment_reference: string;
-  type: 'credit' | 'deposit';
-  amount: number;
-  date: string;
-};
-
-
-type TransactionProps = {
-  transaction: Transaction[];
-  openFilterModal: () => void;
-}
-
-const Transactions = ({ transaction, openFilterModal }: TransactionProps) => {
+const Transactions = ({ transaction, openFilterModal, isFilter }: TransactionProps) => {
+  console.log(transaction.length)
+  const total = transaction?.length
   return (
     <section className='pb-16'>
-      <div className='flex justify-between items-center'>
+      <div className='flex flex-col gap-5 md:flex-row md:justify-between md:items-center'>
         <div>
           <h3 className='font-degularBold text-2xl text-black_300'>{transaction?.length} Transactions</h3>
           <p className='font-degularMedium text-sm text-gray-400 font-medium'>Your transactions for the last 7 days</p>
         </div>
         <div className='flex items-center gap-4'>
           <Button
-            text="Filter"
+            text={`Filter ${isFilter ? total : ''}`}
             onClick={openFilterModal}
             icon={<img src="/icons/arrow-down.svg" alt="arrow-down" />}
             className="flex items-center justify-center gap-3 w-[107px] h-12 text-black_300 bg-gray_50 rounded-full"

@@ -10,8 +10,8 @@ const WalletInfo = () => {
   });
 
   return (
-    <section className='flex justify-between mb-24 mt-10 gap-48'>
-      <div className='flex-[0.7] h-full'>
+    <section className='lg:flex justify-between mb-24 mt-10 gap-48'>
+      <div className='lg:flex-[0.7] h-full'>
         <div className='flex items-end gap-24 mb-16'>
           <div>
             <p className='font-degularMedium text-gray-400 text-sm'>Available Balance</p>
@@ -24,7 +24,7 @@ const WalletInfo = () => {
         </div>
         <Chart />
       </div>
-      <div className='flex-[0.3] grid gap-8'>
+      <div className='lg:flex-[0.3] grid gap-8 mt-20'>
         <div>
           <div className='flex justify-between items-end'>
             <p className='font-degularMedium text-sm text-gray-400'>Ledger Balance</p>
