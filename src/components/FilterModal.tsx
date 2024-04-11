@@ -34,6 +34,11 @@ const FilterModal = ({ close, setIsFilter, transactions, setFilteredData }: Filt
 
   const handleFilterTransaction = () => {
     if (transactions.length < 1) return;
+    if (!transactionStatus || !transactionType) {
+      setFilteredData(transactions);
+      return;
+    }
+    console.log('good')
     const sortArray = transactions.map((obj: Transaction) => ({
       ...obj,
       status: obj.status.toLowerCase()
@@ -41,12 +46,20 @@ const FilterModal = ({ close, setIsFilter, transactions, setFilteredData }: Filt
     const transactionsStatus = transactionStatus.map(item => item.toLowerCase())
     const transactionsType = transactionType.map(item => item?.split(' ').join('_').toLowerCase())
     const filter = sortArray.filter((item) => {
-      return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type) &&
-        isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
+      //@ts-expect-error undefined
+      return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type) && isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
     })
 
     setFilteredData(filter);
   };
+
+  const clearFilter = () => {
+    setTransactionStatus([]);
+    setTransactionType([]);
+    setSelectedBtnTimeframe('')
+    setStartDate(null)
+    setEndDate(null)
+  }
 
   return (
     <aside className='h-[90dvh] flex flex-col justify-between'>
@@ -121,6 +134,7 @@ const FilterModal = ({ close, setIsFilter, transactions, setFilteredData }: Filt
         <Button
           text='Clear'
           className='w-full rounded-full border p-2 border-gray_50'
+          onClick={clearFilter}
         />
         <Button
           text="Apply"
