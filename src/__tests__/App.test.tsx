@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 import App from "../App";
 import { transactions, user, wallet } from "../constants/test-data";
-import useTanStackQuery from "../hooks/useTanstackQuery";
+import useTanStackQuery from "../hooks/useTanStackQuery";
 import { getTransactions, getUser, getWallet } from "../services";
 // import { render, screen } from '@testing-library/react';
 vi.mock('axios')
