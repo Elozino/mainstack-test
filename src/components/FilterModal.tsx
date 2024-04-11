@@ -1,66 +1,27 @@
 import { DatePickerInput } from '@mantine/dates';
-import Button from './ui/Button';
-import { Fragment, useState } from 'react';
-import { MultiSelectCheckbox } from './ui/MultiSelectWithCheckBox';
-import {
-  // getDate, getLast7Days, getThisMonth, 
-  getTodayDate, isDateWithinTimeFrame
-} from '../utils/date';
-import { FilterByProps, FilterModalProps, Transaction } from '../types';
+import { Fragment } from 'react';
 import { filterBy } from '../constants/data';
+import { FilterByProps, FilterModalProps } from '../types';
+import Button from './ui/Button';
+import { MultiSelectCheckbox } from './ui/MultiSelectWithCheckBox';
 
 
-const filterByDate = (date: string | undefined): string | undefined => {
-  switch (date) {
-    case 'Today':
-      return getTodayDate();
-    case 'Last 7 days':
-      return getTodayDate();
-    case 'This month':
-      return getTodayDate();
-    case 'Last 3 months':
-      return getTodayDate();
-    default:
-      return undefined;
-  }
-}
-
-const FilterModal = ({ close, setIsFilter, transactions, setFilteredData }: FilterModalProps) => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [selectedBtnTimeframe, setSelectedBtnTimeframe] = useState<string | undefined>('')
-  const [transactionType, setTransactionType] = useState<string[]>([])
-  const [transactionStatus, setTransactionStatus] = useState<string[]>([])
-
-  const handleFilterTransaction = () => {
-    if (transactions.length < 1) return;
-    if (!transactionStatus || !transactionType) {
-      setFilteredData(transactions);
-      return;
-    }
-    console.log('good')
-    const sortArray = transactions.map((obj: Transaction) => ({
-      ...obj,
-      status: obj.status.toLowerCase()
-    }))
-    const transactionsStatus = transactionStatus.map(item => item.toLowerCase())
-    const transactionsType = transactionType.map(item => item?.split(' ').join('_').toLowerCase())
-    const filter = sortArray.filter((item) => {
-      //@ts-expect-error undefined
-      return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type) && isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
-    })
-
-    setFilteredData(filter);
-  };
-
-  const clearFilter = () => {
-    setTransactionStatus([]);
-    setTransactionType([]);
-    setSelectedBtnTimeframe('')
-    setStartDate(null)
-    setEndDate(null)
-  }
-
+const FilterModal = ({
+  close,
+  setIsFilter,
+  clearFilter,
+  startDate,
+  endDate,
+  transactionType,
+  handleFilterTransaction,
+  transactionStatus,
+  selectedBtnTimeframe,
+  handleSelectTimeFrame,
+  setEndDate,
+  setStartDate,
+  setTransactionType,
+  setTransactionStatus,
+}: FilterModalProps) => {
   return (
     <aside className='h-[90dvh] flex flex-col justify-between'>
       <section className='flex flex-col gap-6'>
@@ -80,8 +41,7 @@ const FilterModal = ({ close, setIsFilter, transactions, setFilteredData }: Filt
               ${selectedBtnTimeframe === item?.title ? 'bg-black_300 text-white' : 'hover:bg-gray_50'}
               `}
                 onClick={() => {
-                  const title = item?.title
-                  setSelectedBtnTimeframe(title)
+                  handleSelectTimeFrame(item?.title)
                 }}
               />
             </Fragment>
@@ -143,8 +103,8 @@ const FilterModal = ({ close, setIsFilter, transactions, setFilteredData }: Filt
           `}
           onClick={() => {
             setIsFilter(true)
-            handleFilterTransaction()
             close()
+            handleFilterTransaction()
           }}
         />
       </section>

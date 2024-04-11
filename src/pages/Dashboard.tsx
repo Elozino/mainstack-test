@@ -7,13 +7,19 @@ import WalletInfo from '../components/WalletInfo'
 import { useDisclosure } from '@mantine/hooks'
 import CustomDrawer from '../components/ui/CustomDrawer'
 import FilterModal from '../components/FilterModal'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Transaction } from '../types'
 
 const Dashboard = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [filteredData, setFilteredData] = useState<Transaction[]>([]);
   const [isFilter, setIsFilter] = useState<boolean>(false)
+
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [selectedBtnTimeframe, setSelectedBtnTimeframe] = useState<string | undefined>('')
+  const [transactionType, setTransactionType] = useState<string[]>([])
+  const [transactionStatus, setTransactionStatus] = useState<string[]>([])
 
   const { data } = useQuery({
     queryKey: ['getTransactions'],
@@ -27,6 +33,40 @@ const Dashboard = () => {
       return data;
     }
   }, [data, filteredData, isFilter])
+
+  const handleFilterTransaction = useCallback(() => {
+    if (data.length < 1) return;
+    if (!transactionStatus || !transactionType) {
+      setFilteredData(data);
+      return;
+    }
+    const sortArray = data.map((obj: Transaction) => ({
+      ...obj,
+      status: obj.status.toLowerCase()
+    }))
+    const transactionsStatus = transactionStatus.map(item => item.toLowerCase())
+    const transactionsType = transactionType.map(item => item?.split(' ').join('_').toLowerCase())
+    const filter = sortArray.filter((item: { status: string; metadata: { type: string }; date: string }) => {
+      return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type)
+      // && isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
+    })
+
+    setFilteredData(filter);
+  }, [data, transactionStatus, transactionType]);
+
+  const clearFilter = () => {
+    setIsFilter(false);
+    setTransactionStatus([]);
+    setTransactionType([]);
+    setSelectedBtnTimeframe('')
+    setStartDate(null)
+    setEndDate(null)
+  }
+
+  const handleSelectTimeFrame = (title: string) => {
+    setSelectedBtnTimeframe(title)
+  }
+
 
   return (
     <div className='px-5 h-dvh'>
@@ -53,8 +93,18 @@ const Dashboard = () => {
         <FilterModal
           close={close}
           setIsFilter={setIsFilter}
-          transactions={data}
-          setFilteredData={setFilteredData}
+          clearFilter={clearFilter}
+          handleFilterTransaction={handleFilterTransaction}
+          startDate={startDate}
+          endDate={endDate}
+          selectedBtnTimeframe={selectedBtnTimeframe}
+          transactionType={transactionType}
+          transactionStatus={transactionStatus}
+          handleSelectTimeFrame={handleSelectTimeFrame}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          setTransactionType={setTransactionType}
+          setTransactionStatus={setTransactionStatus}
         />
       </CustomDrawer>
     </div>

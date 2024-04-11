@@ -16,7 +16,7 @@ const WalletInfo = ({ transaction }: { transaction: Transaction[] }) => {
         <div className='flex items-end gap-24 mb-16'>
           <div>
             <p className='font-degularMedium text-gray-400 text-sm'>Available Balance</p>
-            <p className='font-degularBold text-4xl leading-[48px] text-black_300'>USD {data?.balance}</p>
+            <p className='font-degularBold text-4xl leading-[48px] text-black_300'>USD {data?.balance.toLocaleString()}</p>
           </div>
           <Button
             text="Withdraw"
@@ -33,28 +33,28 @@ const WalletInfo = ({ transaction }: { transaction: Transaction[] }) => {
             <p className='font-degularMedium text-sm text-gray-400'>Ledger Balance</p>
             <img src="/icons/info.svg" alt="info" />
           </div>
-          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.ledger_balance}</p>
+          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.ledger_balance.toLocaleString()}</p>
         </div>
         <div>
           <div className='flex justify-between items-end'>
             <p className='font-degularMedium text-sm text-gray-400'>Total Payout</p>
             <img src="/icons/info.svg" alt="info" />
           </div>
-          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.total_payout}</p>
+          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.total_payout.toLocaleString()}</p>
         </div>
         <div>
           <div className='flex justify-between items-end'>
             <p className='font-degularMedium text-sm text-gray-400'>Total Revenue</p>
             <img src="/icons/info.svg" alt="info" />
           </div>
-          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.total_revenue}</p>
+          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.total_revenue.toLocaleString()}</p>
         </div>
         <div>
           <div className='flex justify-between items-end'>
             <p className='font-degularMedium text-sm text-gray-400'>Pending Payout</p>
             <img src="/icons/info.svg" alt="info" />
           </div>
-          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.pending_payout}</p>
+          <p className='font-degularBold text-[28px] leading-[38px] text-black_300'>USD {data?.pending_payout.toLocaleString()}</p>
         </div>
       </div>
     </section>

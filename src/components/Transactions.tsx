@@ -1,4 +1,5 @@
 import { TransactionProps } from '../types'
+import { formatDate } from '../utils/date'
 import Button from './ui/Button'
 
 const Transactions = ({ transaction, openFilterModal, isFilter }: TransactionProps) => {
@@ -43,8 +44,8 @@ const Transactions = ({ transaction, openFilterModal, isFilter }: TransactionPro
               </div>
             </div>
             <div className='flex flex-col items-end'>
-              <p className='font-degularBold text-base text-black_300'>USD {transaction?.amount}</p>
-              <p className='font-degularMedium text-sm text-gray_400'>Apr 03,2022 {transaction?.date}</p>
+              <p className='font-degularBold text-base text-black_300'>USD {transaction?.amount.toLocaleString()}</p>
+              <p className='font-degularMedium text-sm text-gray_400'>{formatDate(transaction?.date)}</p>
             </div>
           </div>
         ))}

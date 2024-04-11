@@ -60,3 +60,24 @@ export function isDateWithinTimeFrame(
   if (!date || !start || !end) return;
   return date >= start && date <= end;
 }
+
+export const filterByDate = (date: string | undefined): string | undefined => {
+  switch (date) {
+    case 'Today':
+      return getTodayDate();
+    case 'Last 7 days':
+      return getLast7Days();
+    case 'This month':
+      return getThisMonth();
+    case 'Last 3 months':
+      return getLast3Months();
+    default:
+      return undefined;
+  }
+}
+
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = { month: 'short', day: '2-digit', year: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+};

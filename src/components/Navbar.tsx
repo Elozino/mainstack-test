@@ -6,6 +6,7 @@ import AppMenu from "./AppMenu";
 import { useState } from "react";
 
 const Navbar = () => {
+  const [activeNav, setActiveNav] = useState('');
   const [openApp, setOpenApp] = useState(false)
   const { data } = useQuery({
     queryKey: ['getUser'],
@@ -26,46 +27,54 @@ const Navbar = () => {
       <div
         className='hidden md:flex items-center gap-5'
       >
-        <a href='#' className='flex items-start gap-1 text-gray_400
-        hover:bg-gray_50 py-2 px-4 rounded-full transition-all
-        group
-        '>
+        <a href='#' className={`flex items-start gap-1 text-gray_400
+        py-2 px-4 rounded-full transition-all
+        group  ${activeNav === 'home' ? 'bg-black text-white group hover:bg-black' : 'hover:bg-gray_50'}`}
+          onClick={() => setActiveNav('home')}
+        >
           <img src="/icons/home.svg" alt="home"
-          // className="group-hover:filter-white"
+            className={`${activeNav === 'home' ? 'filter-white' : ''}`}
           />
           <span className='text-md leading-6 font-degularSemibold'>
             Home
           </span>
         </a>
-        <a href='#' className='flex items-start gap-1 text-gray_400
-        hover:bg-gray_50 py-2 px-4 rounded-full transition-all
-        group
-        '>
+        <a href='#' className={`flex items-start gap-1 text-gray_400
+        py-2 px-4 rounded-full transition-all
+        group ${activeNav === 'analytics' ? 'bg-black text-white group hover:bg-black' : 'hover:bg-gray_50'}`}
+          onClick={() => setActiveNav('analytics')}
+        >
           <img src="/icons/analytics.svg" alt="analytics"
-          // className="group-hover:filter-white"
+            className={`${activeNav === 'analytics' ? 'filter-white' : ''}`}
           />
           <span className='text-base leading-6 font-degularSemibold'>Analytics</span>
         </a>
-        <a href='#' className='flex items-start gap-1 text-gray_400
-        hover:bg-gray_50 py-2 px-4 rounded-full transition-all
-        group
-        '>
+        <a href='#' className={`flex items-start gap-1 text-gray_400
+        py-2 px-4 rounded-full transition-all
+        group  ${activeNav === 'revenue' ? 'bg-black text-white group hover:bg-black' : 'hover:bg-gray_50'}`}
+          onClick={() => setActiveNav('revenue')}
+        >
           <img src="/icons/revenue.svg" alt="revenue"
-          // className="group-hover:filter-white"
+            className={`${activeNav === 'revenue' ? 'filter-white' : ''}`}
           />
           <span className='text-base leading-6 font-degularSemibold'>Revenue</span>
         </a>
-        <a href='#' className='flex items-start gap-1 text-gray_400
-        hover:bg-gray_50 py-2 px-4 rounded-full transition-all
-        group
-        '>
+        <a href='#' className={`flex items-start gap-1 text-gray_400
+        py-2 px-4 rounded-full transition-all
+        group  ${activeNav === 'crm' ? 'bg-black text-white group hover:bg-black' : 'hover:bg-gray_50'}`}
+          onClick={() => setActiveNav('crm')}
+        >
           <img src="/icons/crm.svg" alt="crm"
-          // className="group-hover:filter-white"
+            className={`${activeNav === 'crm' ? 'filter-white' : ''}`}
           />
           <span className='text-base leading-6 font-degularSemibold'>CRM</span>
         </a>
         <div
-          onClick={() => setOpenApp(!openApp)}
+          onClick={() => {
+            setOpenApp(!openApp)
+            setActiveNav('app')
+          }
+          }
         >
           <Menu
             width={350} shadow="md" radius={15}
@@ -129,7 +138,7 @@ const Navbar = () => {
           <ProfileMenu data={data} />
         </Menu>
       </div>
-    </nav>
+    </nav >
   )
 }
 
