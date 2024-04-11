@@ -1,13 +1,8 @@
 import { Menu } from '@mantine/core'
-
-type ProfileProps = {
-  first_name: string;
-  last_name: string;
-  email: string;
-}
+import { Profile } from '../types';
 
 type ProfileMenuProps = {
-  data: ProfileProps;
+  data: Profile | undefined;
 }
 
 const ProfileMenu = ({ data }: ProfileMenuProps) => {

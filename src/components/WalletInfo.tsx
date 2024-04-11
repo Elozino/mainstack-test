@@ -1,14 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
+import useTanStackQuery from '../hooks/useTanStackQuery'
 import { getWallet } from '../services'
+import { Transaction } from '../types'
 import Chart from './Chart'
 import Button from './ui/Button'
-import { Transaction } from '../types'
 
 const WalletInfo = ({ transaction }: { transaction: Transaction[] }) => {
-  const { data } = useQuery({
-    queryKey: ['getWallet'],
-    queryFn: getWallet,
-  });
+  const { data } = useTanStackQuery('getWallet', getWallet);
 
   return (
     <section className='lg:flex justify-between mb-24 mt-10 gap-48'>

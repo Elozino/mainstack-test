@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
+import { useDisclosure } from '@mantine/hooks'
+import { useCallback, useMemo, useState } from 'react'
+import FilterModal from '../components/FilterModal'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import Transactions from '../components/Transactions'
-import { getTransactions } from '../services'
 import WalletInfo from '../components/WalletInfo'
-import { useDisclosure } from '@mantine/hooks'
 import CustomDrawer from '../components/ui/CustomDrawer'
-import FilterModal from '../components/FilterModal'
-import { useCallback, useMemo, useState } from 'react'
+import useTanStackQuery from '../hooks/useTanStackQuery'
+import { getTransactions } from '../services'
 import { Transaction } from '../types'
 
 const Dashboard = () => {
@@ -21,10 +21,7 @@ const Dashboard = () => {
   const [transactionType, setTransactionType] = useState<string[]>([])
   const [transactionStatus, setTransactionStatus] = useState<string[]>([])
 
-  const { data } = useQuery({
-    queryKey: ['getTransactions'],
-    queryFn: getTransactions,
-  })
+  const { data } = useTanStackQuery('getTransactions', getTransactions)
 
   const transactions = useMemo(() => {
     if (isFilter) {

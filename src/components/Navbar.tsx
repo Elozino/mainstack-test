@@ -1,18 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { getUser } from "../services"
 import { Menu } from "@mantine/core";
-import ProfileMenu from "./ProfileMenu";
-import AppMenu from "./AppMenu";
 import { useState } from "react";
+import useTanStackQuery from "../hooks/useTanStackQuery";
+import { getUser } from "../services";
+import AppMenu from "./AppMenu";
+import ProfileMenu from "./ProfileMenu";
+import { Profile } from "../types";
 
 const Navbar = () => {
   const [activeNav, setActiveNav] = useState('');
   const [openApp, setOpenApp] = useState(false)
-  const { data } = useQuery({
-    queryKey: ['getUser'],
-    queryFn: getUser,
-  })
-
+  const { data } = useTanStackQuery<Profile>('getUser', getUser)
   return (
     <nav className='
     bg-white border-2 rounded-[100px] h-16 shadow-navbar

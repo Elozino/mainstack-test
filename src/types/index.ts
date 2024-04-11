@@ -38,3 +38,9 @@ export type FilterModalProps = {
   setTransactionType: React.Dispatch<React.SetStateAction<string[]>>;
   setTransactionStatus: React.Dispatch<React.SetStateAction<string[]>>;
 };
+
+export type Profile = {
+  first_name: string;
+  last_name: string;
+  email: string;
+};
