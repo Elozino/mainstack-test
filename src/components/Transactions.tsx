@@ -2,8 +2,6 @@ import { TransactionProps } from '../types'
 import Button from './ui/Button'
 
 const Transactions = ({ transaction, openFilterModal, isFilter }: TransactionProps) => {
-  console.log(transaction.length)
-  const total = transaction?.length
   return (
     <section className='pb-16'>
       <div className='flex flex-col gap-5 md:flex-row md:justify-between md:items-center'>
@@ -13,7 +11,7 @@ const Transactions = ({ transaction, openFilterModal, isFilter }: TransactionPro
         </div>
         <div className='flex items-center gap-4'>
           <Button
-            text={`Filter ${isFilter ? total : ''}`}
+            text={`Filter ${isFilter ? transaction?.length : ''}`}
             onClick={openFilterModal}
             icon={<img src="/icons/arrow-down.svg" alt="arrow-down" />}
             className="flex items-center justify-center gap-3 w-[107px] h-12 text-black_300 bg-gray_50 rounded-full"
