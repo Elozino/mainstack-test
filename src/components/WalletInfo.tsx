@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import { getWallet } from '../services'
 import Chart from './Chart'
 import Button from './ui/Button'
+import { Transaction } from '../types'
 
-const WalletInfo = () => {
+const WalletInfo = ({ transaction }: { transaction: Transaction[] }) => {
   const { data } = useQuery({
     queryKey: ['getWallet'],
     queryFn: getWallet,
@@ -22,7 +23,9 @@ const WalletInfo = () => {
             className="bg-black_300 text-white w-[167px] rounded-full flex justify-center items-center h-[52px] font-degularSemibold"
           />
         </div>
-        <Chart />
+        <Chart
+          transaction={transaction}
+        />
       </div>
       <div className='lg:flex-[0.3] grid gap-8 mt-20'>
         <div>

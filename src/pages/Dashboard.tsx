@@ -36,7 +36,9 @@ const Dashboard = () => {
       <main className='flex items-center gap-3 h-[90dvh] w-full'>
         <Sidebar />
         <section className='h-full p-2 w-full pl-24 md:pr-10 lg:pr-32'>
-          <WalletInfo />
+          <WalletInfo
+            transaction={transactions}
+          />
           <Transactions
             openFilterModal={open}
             isFilter={isFilter}
