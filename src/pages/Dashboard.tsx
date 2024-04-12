@@ -47,7 +47,7 @@ const Dashboard = () => {
     const filter = sortArray.filter((item: { status: string; metadata: { type: string }; date: string }) => {
       return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type)
         // @ts-expect-error undefined
-        && isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
+        || isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
     })
 
     setFilteredData(filter);
@@ -65,6 +65,11 @@ const Dashboard = () => {
   const clearTransactionFilter = () => {
     setFilteredData(data);
     setIsFilter(false);
+    setTransactionStatus([]);
+    setTransactionType([]);
+    setSelectedBtnTimeframe('')
+    setStartDate(null)
+    setEndDate(null)
   }
 
   const handleSelectTimeFrame = (title: string) => {

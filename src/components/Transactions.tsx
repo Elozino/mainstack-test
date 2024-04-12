@@ -70,7 +70,7 @@ export default Transactions
 
 const NoTransaction = ({ clearFilter }: { clearFilter: () => void }) => {
   return (
-    <div className='grid place-content-center gap-3 w-[30%] mx-auto my-10'>
+    <div className='grid place-content-center gap-3 w-[80%] md:w-[60%] lg:w-[40%] xl:w-[30%] mx-auto my-10'>
       <img src="/icons/no-data.svg" alt="no-data-icon" />
       <h2 className='font-degularBold text-[28px] leading-10 text-black_300'>No matching transaction found for the selected filter</h2>
       <p className='font-degularMedium text-base text-gray_400'>Change your filters to see more results, or add a new product.</p>
