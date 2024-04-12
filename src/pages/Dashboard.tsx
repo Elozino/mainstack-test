@@ -33,17 +33,17 @@ const Dashboard = () => {
   }, [data, filteredData, isFilter])
 
   const handleFilterTransaction = useCallback(() => {
-    if (transactions.length < 1) return;
+    if (transactions?.length < 1) return;
     if (!transactionStatus && !transactionType && !startDate && !endDate && !selectedBtnTimeframe) {
       setFilteredData(data);
       return;
     }
-    const sortArray = data.map((obj: Transaction) => ({
+    const sortArray = data?.map((obj: Transaction) => ({
       ...obj,
       status: obj.status.toLowerCase()
     }))
-    const transactionsStatus = transactionStatus.map(item => item.toLowerCase())
-    const transactionsType = transactionType.map(item => item?.split(' ').join('_').toLowerCase())
+    const transactionsStatus = transactionStatus?.map(item => item.toLowerCase())
+    const transactionsType = transactionType?.map(item => item?.split(' ').join('_').toLowerCase())
     const filter = sortArray.filter((item: { status: string; metadata: { type: string }; date: string }) => {
       return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type)
         // @ts-expect-error undefined
@@ -51,7 +51,7 @@ const Dashboard = () => {
     })
 
     setFilteredData(filter);
-  }, [data, endDate, selectedBtnTimeframe, startDate, transactionStatus, transactionType, transactions.length]);
+  }, [data, endDate, selectedBtnTimeframe, startDate, transactionStatus, transactionType, transactions?.length]);
 
   const clearFilter = () => {
     setIsFilter(false);
