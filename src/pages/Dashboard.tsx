@@ -9,6 +9,7 @@ import CustomDrawer from '../components/ui/CustomDrawer'
 import useTanStackQuery from '../hooks/useTanStackQuery'
 import { getTransactions } from '../services'
 import { Transaction } from '../types'
+import { filterByDate, getTodayDate, isDateWithinTimeFrame } from '../utils/date'
 
 const Dashboard = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -32,12 +33,12 @@ const Dashboard = () => {
   }, [data, filteredData, isFilter])
 
   const handleFilterTransaction = useCallback(() => {
-    if (data.length < 1) return;
-    if (!transactionStatus || !transactionType) {
-      setFilteredData(data);
+    if (transactions.length < 1) return;
+    if (!transactionStatus && !transactionType && !startDate && !endDate && !selectedBtnTimeframe) {
+      setFilteredData(transactions);
       return;
     }
-    const sortArray = data.map((obj: Transaction) => ({
+    const sortArray = transactions.map((obj: Transaction) => ({
       ...obj,
       status: obj.status.toLowerCase()
     }))
@@ -45,11 +46,12 @@ const Dashboard = () => {
     const transactionsType = transactionType.map(item => item?.split(' ').join('_').toLowerCase())
     const filter = sortArray.filter((item: { status: string; metadata: { type: string }; date: string }) => {
       return transactionsStatus.includes(item?.status) || transactionsType.includes(item?.metadata?.type)
-      // && isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
+        // @ts-expect-error undefined
+        && isDateWithinTimeFrame(item?.date, filterByDate(selectedBtnTimeframe), getTodayDate())
     })
 
     setFilteredData(filter);
-  }, [data, transactionStatus, transactionType]);
+  }, [endDate, selectedBtnTimeframe, startDate, transactionStatus, transactionType, transactions]);
 
   const clearFilter = () => {
     setIsFilter(false);
@@ -58,6 +60,11 @@ const Dashboard = () => {
     setSelectedBtnTimeframe('')
     setStartDate(null)
     setEndDate(null)
+  }
+
+  const clearTransactionFilter = () => {
+    setFilteredData(data);
+    setIsFilter(false);
   }
 
   const handleSelectTimeFrame = (title: string) => {
@@ -80,6 +87,7 @@ const Dashboard = () => {
             openFilterModal={open}
             isFilter={isFilter}
             transaction={transactions}
+            clearFilter={clearTransactionFilter}
           />
         </section>
       </main>

@@ -17,6 +17,7 @@ export type Transaction = {
 export type TransactionProps = {
   transaction: Transaction[];
   openFilterModal: () => void;
+  clearFilter: () => void;
   isFilter: boolean;
 };
 
