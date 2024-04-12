@@ -35,10 +35,10 @@ const Dashboard = () => {
   const handleFilterTransaction = useCallback(() => {
     if (transactions.length < 1) return;
     if (!transactionStatus && !transactionType && !startDate && !endDate && !selectedBtnTimeframe) {
-      setFilteredData(transactions);
+      setFilteredData(data);
       return;
     }
-    const sortArray = transactions.map((obj: Transaction) => ({
+    const sortArray = data.map((obj: Transaction) => ({
       ...obj,
       status: obj.status.toLowerCase()
     }))
@@ -51,7 +51,7 @@ const Dashboard = () => {
     })
 
     setFilteredData(filter);
-  }, [endDate, selectedBtnTimeframe, startDate, transactionStatus, transactionType, transactions]);
+  }, [data, endDate, selectedBtnTimeframe, startDate, transactionStatus, transactionType, transactions.length]);
 
   const clearFilter = () => {
     setIsFilter(false);
